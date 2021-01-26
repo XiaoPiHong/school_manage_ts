@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>登录组件</h1>
+    <Button type="primary">登录</Button>
   </div>
 </template>
 <script lang="ts">

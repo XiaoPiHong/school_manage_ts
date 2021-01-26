@@ -13,4 +13,11 @@ export default class App extends Vue {}
 </script>
 
 <style lang="less">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 1200px;
+  overflow: auto;
+}
 </style>
