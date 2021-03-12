@@ -6,13 +6,23 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/Login'
+    redirect: '/Index'
   },
   {
-    path: '/Login',
-    name: 'Login',
-    component: () => import('@v/Login.vue')
+    path: '/Index',
+    name: 'Index',
+    component: () => import('@v/Main/Home.vue')
   },
+  //iview知识模块
+  {
+    path: '/Iview',
+    component: () => import('@v/Main/Home.vue'),
+    children: [{
+      path: '/ValidateForm',
+      name: 'ValidateForm',
+      component: () => import('@v/Iview/Form/ValidateForm.vue')
+    }]
+  }
 ]
 
 const router = new VueRouter({
