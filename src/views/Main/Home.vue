@@ -1,12 +1,14 @@
 <template>
-  <Tabs type="card" :animated="false" closable ref="tabsRef" name="homeTabs" :value="currentPane" @on-click="changeRoute" @on-tab-remove="handleTabRemove" closable>
-    <TabPane label="目录" name="Index" v-if="Index" :closable="false" tab="homeTabs">
-      <Catalog v-if="Index"></Catalog>
-    </TabPane>
-    <TabPane label="表单验证" name="ValidateForm" v-if="ValidateForm" tab="homeTabs">
-      <ValidateForm v-if="ValidateForm"></ValidateForm>
-    </TabPane>
-  </Tabs>
+  <div class="home">
+    <Tabs type="card" :animated="false" closable ref="tabsRef" name="homeTabs" :value="currentPane" @on-click="changeRoute" @on-tab-remove="handleTabRemove" closable>
+      <TabPane label="目录" name="Index" v-if="Index" :closable="false" tab="homeTabs">
+        <Catalog v-if="Index"></Catalog>
+      </TabPane>
+      <TabPane label="表单验证" name="ValidateForm" v-if="ValidateForm" tab="homeTabs">
+        <ValidateForm v-if="ValidateForm"></ValidateForm>
+      </TabPane>
+    </Tabs>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
@@ -37,7 +39,7 @@ export default class Home extends Vue {
 
   //打开对应页面tabpane
   private openTabPane(name: string): void {
-    this[name] = true
+    ;(this as any)[name] = true
     this.currentPane = name
   }
 
@@ -46,9 +48,9 @@ export default class Home extends Vue {
     // 如果点击的tabpane项是当前，则刷新当前页面
     if (name == this.$route.name) {
       // 刷新当前tabpane
-      this[name] = false
+      ;(this as any)[name] = false
       this.$nextTick(() => {
-        this[name] = true
+        ;(this as any)[name] = true
       })
       return
     }
@@ -59,10 +61,10 @@ export default class Home extends Vue {
 
   // 关闭tabpane
   private handleTabRemove(name: string): void {
-    this[name] = false
+    ;(this as any)[name] = false
     if (name === this.$route.name) {
       this.$nextTick(() => {
-        this.changeRoute((this.$refs.tabsRef as Vue).activeKey)
+        this.changeRoute((this.$refs.tabsRef as any).activeKey)
       })
     }
   }
@@ -74,3 +76,12 @@ export default class Home extends Vue {
   private ValidateForm: boolean = false //验证表单
 }
 </script>
+<style lang="less" scoped>
+.home {
+  padding: 10px 12px 0;
+
+  /deep/ .ivu-tabs-bar {
+    margin-bottom: 0px;
+  }
+}
+</style>
