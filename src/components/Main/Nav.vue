@@ -37,6 +37,10 @@ export default class Nav extends Vue {
               ResourceName: '表单验证',
               ElementId: 'ValidateForm',
             },
+            {
+              ResourceName: 'Select组件',
+              ElementId: 'SelectCom',
+            },
           ],
         },
       ],

@@ -21,6 +21,10 @@ const routes: Array<RouteConfig> = [
       path: '/ValidateForm',
       name: 'ValidateForm',
       component: () => import('@v/Iview/Form/ValidateForm.vue')
+    }, {
+      path: '/SelectCom',
+      name: 'SelectCom',
+      component: () => import('@v/Iview/Form/SelectCom.vue')
     }]
   }
 ]

@@ -7,6 +7,9 @@
       <TabPane label="表单验证" name="ValidateForm" v-if="ValidateForm" tab="homeTabs">
         <ValidateForm v-if="ValidateForm"></ValidateForm>
       </TabPane>
+      <TabPane label="Select组件" name="SelectCom" v-if="SelectCom" tab="homeTabs">
+        <SelectCom v-if="SelectCom"></SelectCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -18,6 +21,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
   components: {
     Catalog: () => import('@v/Main/Catalog.vue'),
     ValidateForm: () => import('@v/Iview/Form/ValidateForm.vue'),
+    SelectCom: () => import('@v/Iview/Form/SelectCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -74,6 +78,7 @@ export default class Home extends Vue {
   private Index: boolean = true //目录(该页面代表的路由是'/Index')
   // iview知识模块
   private ValidateForm: boolean = false //验证表单
+  private SelectCom: boolean = false //Select组件
 }
 </script>
 <style lang="less" scoped>
