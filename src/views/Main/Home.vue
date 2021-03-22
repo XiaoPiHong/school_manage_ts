@@ -10,6 +10,9 @@
       <TabPane label="Select组件" name="SelectCom" v-if="SelectCom" tab="homeTabs">
         <SelectCom v-if="SelectCom"></SelectCom>
       </TabPane>
+      <TabPane label="Input组件注意点" name="InputCom" v-if="InputCom" tab="homeTabs">
+        <InputCom v-if="InputCom"></InputCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -22,6 +25,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     Catalog: () => import('@v/Main/Catalog.vue'),
     ValidateForm: () => import('@v/Iview/Form/ValidateForm.vue'),
     SelectCom: () => import('@v/Iview/Form/SelectCom.vue'),
+    InputCom: () => import('@v/Iview/Form/InputCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -79,6 +83,7 @@ export default class Home extends Vue {
   // iview知识模块
   private ValidateForm: boolean = false //验证表单
   private SelectCom: boolean = false //Select组件
+  private InputCom: boolean = false //Form校验规则
 }
 </script>
 <style lang="less" scoped>
