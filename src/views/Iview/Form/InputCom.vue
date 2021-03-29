@@ -4,6 +4,7 @@
     <p>1.Input组件中的<span style="color:red;">type="number"</span>属性，是限制只能输入数字，但是(- e . 等符号是可以输入的，但是可能只是视图层改变，真正绑定的变量是没有改变)</p>
     <p>2.iview表单规则中<span style="color:red;">type: 'number'</span>属性，是检查该输入框中变量的类型是否为数字类型</p>
     <p>3.iview的Input组件，就算一开始就给其一个数字的类型，且给初始值，但是在改变内容的时候，其类型会自动变成字符串类型，所以在表单规则中使用<span style="color:red;">type: 'number'</span>，就一定要确保绑定的变量类型为数字类型</p>
+    <p>4.Input组件的<span style="color:red;">number</span>属性，作用是将输入框的内容转为number类型</p>
     </Col>
     <Col span="1">
 
@@ -11,7 +12,7 @@
     <Col span="17">
     <Form :model="form" :rules="formRules" ref="formRef" :label-width="150" inline @submit.native.prevent>
       <FormItem label="数字" prop="num">
-        <Input v-model="form.num" placeholder="请输入数字" type="number" @on-change="changeNum"></Input>
+        <Input v-model="form.num" placeholder="请输入数字" type="number" @on-change="ValidateNumber($event,'num',form)"></Input>
       </FormItem>
       <FormItem>
         <span>输入框值的类型为：{{typeof(form.num)}}</span>
@@ -36,38 +37,56 @@ export default class InputCom extends Vue {
     ;(this.$refs.formRef as any).resetFields()
   }
 
-  private changeNum(e: any): void {
-    if (e.data === 'e' || e.data === '-') {
-      this.form.num = 0
+  //验证[0,1]且只能保留三位小数
+  private ValidateNumber(Event: any, name: string, variable: any) {
+    if (Event.data === 'e' || Event.data === '-') {
+      this.$set(variable, name, 0)
       this.$nextTick(() => {
-        this.form.num = ''
+        this.$set(variable, name, '')
       })
-      return
+    } else if (Number(Event.target.value >= 1)) {
+      this.$set(variable, name, '')
+      this.$nextTick(() => {
+        this.$set(variable, name, 1)
+      })
+    } else if (Number(Event.target.value < 0)) {
+      this.$nextTick(() => {
+        this.$set(variable, name, 0)
+      })
     } else if (
-      (this.form.num as string).indexOf('0') !==
-        (this.form.num as string).lastIndexOf('0') &&
-      (this.form.num as string)[0] === '0'
+      Event.target.value.indexOf('0') !== Event.target.value.lastIndexOf('0') &&
+      Event.target.value[0] === '0' &&
+      Event.target.value[1] != '.'
     ) {
-      this.form.num = ''
       this.$nextTick(() => {
-        this.form.num = 0
+        this.$set(variable, name, 0)
       })
-      return
+    } else {
+      if (
+        Event.target.value.indexOf('.') &&
+        Event.target.value.length - 2 > 3
+      ) {
+        let newStr =
+          Math.floor(Number.parseFloat(Event.target.value) * 1000) / 1000 //Number.parseFloat(Event.target.value).toFixed(3)//保留三位小数的方法，目前使用的不四舍五入，注释的会四舍五入
+        this.$nextTick(() => {
+          this.$set(variable, name, Number(newStr))
+        })
+      }
     }
-    this.form.num = this.form.num === '' ? '' : Number(this.form.num)
   }
 
   private form: Interface.InputComForm = new Interface.InputComForm()
 
   private formRules: any = {
-    num: [
-      {
-        required: true,
-        type: 'number',
-        message: '请输入正数',
-        trigger: 'change',
-      },
-    ],
+    //由于该例子可能为字符串或数字类型，所以该字段不能用type的表单校验规则来校验是否为对应类型
+    // num: [
+    //   {
+    //     required: true,
+    //     type: 'number',
+    //     message: '请输入[0,1]的数字，且最多保留3位小数',
+    //     trigger: 'change',
+    //   },
+    // ],
   }
 }
 </script>
