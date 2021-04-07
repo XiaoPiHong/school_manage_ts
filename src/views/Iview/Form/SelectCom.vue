@@ -1,9 +1,10 @@
 <template>
   <Row>
     <Col span="5">
-    <p>1.下拉组件中绑定的值一定要是下拉数据中存在的值，否则清空后会变成undefined</p>
-    <p>2.要想用表单的resetFields方法清空表单<span style="color:red;">并重置</span>（包括：下拉、输入框等），必须给FormItem绑定prop属性,且必须对应其绑定的变量名称</p>
+    <p>1.iview4.x下拉组件中绑定的值一定要是下拉数据中存在的值，否则清空后会变成undefined</p>
+    <p>2.要想用表单的resetFields方法清空表单<span class="f-color-red">并重置</span>（包括：下拉、输入框等），必须给FormItem绑定prop属性,且必须对应其绑定的变量名称</p>
     <p>3.下拉的clearable属性可以使其清空，但是清空后默认是''，因为下拉中没有该选项，所有会为undefined</p>
+    <p>4.iview2.x中不会出现清空后undefined的情况，赋值为空或者清空后其绑定的值都是''</p>
     </Col>
     <Col span="1">
     </Col>
