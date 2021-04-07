@@ -13,5 +13,9 @@ namespace Iview {
   export class InputComForm {
     num: number | string = 0
   }
+
+  export class InputNumberForm {
+    num: number | null = null
+  }
 }
 export default Iview

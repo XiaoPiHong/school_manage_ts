@@ -1,10 +1,11 @@
 <template>
   <Row>
     <Col span="6">
-    <p>1.Input组件中的<span class="f-color-red">type="number"</span>属性，是限制只能输入数字，但是(- e . 等符号是可以输入的，但是可能只是视图层改变，真正绑定的变量是没有改变)</p>
-    <p>2.iview表单规则中<span class="f-color-red">type: 'number'</span>属性，是检查该输入框中变量的类型是否为数字类型</p>
-    <p>3.iview的Input组件，就算一开始就给其一个数字的类型，且给初始值，但是在改变内容的时候，其类型会自动变成字符串类型，所以在表单规则中使用<span class="f-color-red">type: 'number'</span>，就一定要确保绑定的变量类型为数字类型</p>
-    <p>4.Input组件的<span class="f-color-red">number</span>属性，作用是将输入框的内容转为number类型</p>
+    <p>1.Input组件中的<span class="f-color-red">type="number"</span>属性，是限制只能输入数字，但是(- e . 等符号是可以输入的，但是可能只是视图层改变，真正绑定的变量是没有改变)</p><br>
+    <p>2.iview表单规则中<span class="f-color-red">type: 'number'</span>属性，是检查该输入框中变量的类型是否为数字类型</p><br>
+    <p>3.iview的Input组件，就算一开始就给其一个数字的类型，且给初始值，但是在改变内容的时候，其类型会自动变成字符串类型，所以在表单规则中使用<span class="f-color-red">type: 'number'</span>，就一定要确保绑定的变量类型为数字类型</p><br>
+    <p>4.Input组件的<span class="f-color-red">number</span>属性，作用是将输入框的内容转为number类型</p><br>
+    <p>5.iview2.x的Input组件不支持<span class="f-color-red">type="number"</span>，因为该版本中该组件type可选值没有number，只有（text、password、textarea、url、email、date）</p>
     </Col>
     <Col span="1">
 

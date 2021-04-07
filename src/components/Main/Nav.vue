@@ -45,6 +45,10 @@ export default class Nav extends Vue {
               ResourceName: 'Input组件注意点',
               ElementId: 'InputCom',
             },
+            {
+              ResourceName: 'InputNumber组件注意点',
+              ElementId: 'InputNumberCom',
+            },
           ],
         },
       ],

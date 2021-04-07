@@ -29,6 +29,10 @@ const routes: Array<RouteConfig> = [
       path: '/InputCom',
       name: 'InputCom',
       component: () => import('@v/Iview/Form/InputCom.vue')
+    }, {
+      path: '/InputNumberCom',
+      name: 'InputNumberCom',
+      component: () => import('@v/Iview/Form/InputNumberCom.vue')
     }]
   }
 ]
