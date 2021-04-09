@@ -16,6 +16,9 @@
       <TabPane label="InputNumber组件注意点" name="InputNumberCom" v-if="InputNumberCom" tab="homeTabs">
         <InputNumberCom v-if="InputNumberCom"></InputNumberCom>
       </TabPane>
+      <TabPane label="Jodit富文本编辑器" name="JoditCom" v-if="JoditCom" tab="homeTabs">
+        <JoditCom v-if="JoditCom"></JoditCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -30,6 +33,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     SelectCom: () => import('@v/Iview/Form/SelectCom.vue'),
     InputCom: () => import('@v/Iview/Form/InputCom.vue'),
     InputNumberCom: () => import('@v/Iview/Form/InputNumberCom.vue'),
+    JoditCom: () => import('@v/Plugins/RichTextEditor/JoditCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -89,6 +93,8 @@ export default class Home extends Vue {
   private SelectCom: boolean = false //Select组件
   private InputCom: boolean = false //Input组件
   private InputNumberCom: boolean = false //InputNumber组件
+  // 插件模块
+  private JoditCom: boolean = false //Jodit富文本编辑器
 }
 </script>
 <style lang="less" scoped>

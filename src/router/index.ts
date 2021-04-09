@@ -34,6 +34,16 @@ const routes: Array<RouteConfig> = [
       name: 'InputNumberCom',
       component: () => import('@v/Iview/Form/InputNumberCom.vue')
     }]
+  },
+  //插件模块
+  {
+    path: '/Plugins',
+    component: () => import('@v/Main/Home.vue'),
+    children: [{
+      path: '/JoditCom',
+      name: 'JoditCom',
+      component: () => import('@v/Plugins/RichTextEditor/JoditCom.vue')
+    }]
   }
 ]
 

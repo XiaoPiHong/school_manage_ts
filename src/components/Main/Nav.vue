@@ -53,6 +53,22 @@ export default class Nav extends Vue {
         },
       ],
     },
+    {
+      ResourceName: '插件',
+      ElementId: 'Plugins',
+      ChildNodes: [
+        {
+          ResourceName: '富文本编辑器',
+          ElementId: 'RichTextEditor',
+          ChildNodes: [
+            {
+              ResourceName: 'Jodit富文本编辑器',
+              ElementId: 'JoditCom',
+            },
+          ],
+        },
+      ],
+    },
   ]
 }
 </script>
