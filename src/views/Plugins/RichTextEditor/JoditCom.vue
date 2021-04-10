@@ -1,12 +1,14 @@
 <template>
-  <h1>测试jodit</h1>
+  <Jodit></Jodit>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   name: 'JoditCom',
-  components: {},
+  components: {
+    Jodit: () => import('@c/PublicCom/Jodit.vue'),
+  },
 })
 export default class JoditCom extends Vue {}
 </script>
