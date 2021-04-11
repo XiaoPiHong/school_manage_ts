@@ -67,6 +67,16 @@ export default class Nav extends Vue {
             },
           ],
         },
+        {
+          ResourceName: '图表',
+          ElementId: 'Echart',
+          ChildNodes: [
+            {
+              ResourceName: '柱状图',
+              ElementId: 'HistogramCom',
+            },
+          ],
+        },
       ],
     },
   ]

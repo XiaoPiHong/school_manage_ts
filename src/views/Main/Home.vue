@@ -19,6 +19,9 @@
       <TabPane label="Jodit富文本编辑器" name="JoditCom" v-if="JoditCom" tab="homeTabs">
         <JoditCom v-if="JoditCom"></JoditCom>
       </TabPane>
+      <TabPane label="柱状图" name="HistogramCom" v-if="HistogramCom" tab="homeTabs">
+        <HistogramCom v-if="HistogramCom"></HistogramCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -34,6 +37,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     InputCom: () => import('@v/Iview/Form/InputCom.vue'),
     InputNumberCom: () => import('@v/Iview/Form/InputNumberCom.vue'),
     JoditCom: () => import('@v/Plugins/RichTextEditor/JoditCom.vue'),
+    HistogramCom: () => import('@v/Plugins/Echart/HistogramCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -95,6 +99,7 @@ export default class Home extends Vue {
   private InputNumberCom: boolean = false //InputNumber组件
   // 插件模块
   private JoditCom: boolean = false //Jodit富文本编辑器
+  private HistogramCom: boolean = false //柱状图
 }
 </script>
 <style lang="less" scoped>

@@ -43,6 +43,10 @@ const routes: Array<RouteConfig> = [
       path: '/JoditCom',
       name: 'JoditCom',
       component: () => import('@v/Plugins/RichTextEditor/JoditCom.vue')
+    }, {
+      path: '/HistogramCom',
+      name: 'HistogramCom',
+      component: () => import('@v/Plugins/Echart/HistogramCom.vue')
     }]
   }
 ]
