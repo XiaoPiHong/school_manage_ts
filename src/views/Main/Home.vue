@@ -22,6 +22,9 @@
       <TabPane label="柱状图" name="HistogramCom" v-if="HistogramCom" tab="homeTabs">
         <HistogramCom v-if="HistogramCom"></HistogramCom>
       </TabPane>
+      <TabPane label="axios库测试页面" name="AxiosCom" v-if="AxiosCom" tab="homeTabs">
+        <AxiosCom v-if="AxiosCom"></AxiosCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -38,6 +41,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     InputNumberCom: () => import('@v/Iview/Form/InputNumberCom.vue'),
     JoditCom: () => import('@v/Plugins/RichTextEditor/JoditCom.vue'),
     HistogramCom: () => import('@v/Plugins/Echart/HistogramCom.vue'),
+    AxiosCom: () => import('@v/Plugins/Axios/AxiosCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -100,6 +104,7 @@ export default class Home extends Vue {
   // 插件模块
   private JoditCom: boolean = false //Jodit富文本编辑器
   private HistogramCom: boolean = false //柱状图
+  private AxiosCom: boolean = false //axios
 }
 </script>
 <style lang="less" scoped>

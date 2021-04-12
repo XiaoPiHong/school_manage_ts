@@ -47,6 +47,10 @@ const routes: Array<RouteConfig> = [
       path: '/HistogramCom',
       name: 'HistogramCom',
       component: () => import('@v/Plugins/Echart/HistogramCom.vue')
+    }, {
+      path: '/AxiosCom',
+      name: 'AxiosCom',
+      component: () => import('@v/Plugins/Axios/AxiosCom.vue')
     }]
   }
 ]

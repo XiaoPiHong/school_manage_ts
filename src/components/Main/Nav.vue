@@ -77,6 +77,16 @@ export default class Nav extends Vue {
             },
           ],
         },
+        {
+          ResourceName: 'axios库',
+          ElementId: 'Axios',
+          ChildNodes: [
+            {
+              ResourceName: 'axios测试',
+              ElementId: 'AxiosCom',
+            },
+          ],
+        },
       ],
     },
   ]
