@@ -4,11 +4,14 @@
     <Button type="primary" @click="test">点击请求</Button>
 
     <table>
-      <tr v-for="(item,index) in list">
-        <td class="pd10" :style="{'background-color':item.isSelect?'red':''}"><Input @mousedown.pervent.native="mouseDown(item,index,'title')" v-model="item.title"></Input></td>
-        <td class="pd10"><Input v-model="item.sex"></Input></td>
-      </tr>
+      <transition-group name="table-list-move">
+        <tr v-for="(item,index) in list" :key="index" draggable="true" @dragstart="dragstart(item)" @dragend="dragend(item)" @dragenter="dragenter(item)">
+          <td class="pd10" :style="{'background-color':item.isSelect?'red':''}"><Input @mousedown.pervent.native="mouseDown(item,index,'title')" v-model="item.title"></Input></td>
+          <td class="pd10"><Input v-model="item.sex"></Input></td>
+        </tr>
+      </transition-group>
     </table>
+
   </Row>
 </template>
 <script lang="ts">
@@ -18,6 +21,34 @@ import { Component, Vue } from 'vue-property-decorator'
   components: {},
 })
 export default class AxiosCom extends Vue {
+  private oldItem: any
+  private newItem: any
+  private dragend(row: any): void {
+    if (this.oldItem != this.newItem) {
+      let oldIndex = this.list.indexOf(this.oldItem)
+      let newIndex = this.list.indexOf(this.newItem)
+      let newItems = [...this.list]
+      // 删除老的节点
+      newItems.splice(oldIndex, 1)
+      // 在列表中目标位置增加新的节点
+      newItems.splice(newIndex, 0, this.oldItem)
+
+      newItems.findIndex((item) => item === newIndex)
+      // this.list一改变，transition-group就起了作用
+      this.list = [...newItems]
+    }
+  }
+  private dragstart(row: any): void {
+    this.oldItem = row
+  }
+  private dragenter(row: any): void {
+    this.newItem = row
+  }
+
+  private destroyed(): void {
+    document.removeEventListener('keydown', this.docKeyDown, false)
+    document.removeEventListener('keyup', this.docKeyUp, false)
+  }
   private mounted(): void {
     document.addEventListener('keydown', this.docKeyDown, false)
     document.addEventListener('keyup', this.docKeyUp, false)
@@ -29,17 +60,17 @@ export default class AxiosCom extends Vue {
       isSelect: false,
     },
     {
-      title: '1',
+      title: '2',
       sex: '男',
       isSelect: false,
     },
     {
-      title: '1',
+      title: '3',
       sex: '男',
       isSelect: false,
     },
     {
-      title: '1',
+      title: '4',
       sex: '男',
       isSelect: false,
     },
@@ -94,17 +125,26 @@ export default class AxiosCom extends Vue {
   private firstClickTitle: string = ''
   private checkIsHasSelect(where: string, index: number, type: string): void {}
   private docKeyDown(e: any): void {
-    this.isShift = true
-    console.log(this.isShift)
+    if (e && e.keyCode == 16) {
+      this.isShift = true
+      document.removeEventListener('keydown', this.docKeyDown, false)
+      console.log(this.isShift)
+    }
   }
   private docKeyUp(e: any): void {
-    this.isShift = false
-    console.log(this.isShift)
+    if (e && e.keyCode == 16) {
+      this.isShift = false
+      document.addEventListener('keydown', this.docKeyDown, false)
+      console.log(this.isShift)
+    }
   }
 }
 </script>
 <style lang="less" scoped>
 .pd10 {
   padding: 10px;
+}
+.table-list-move {
+  transition: transform 0.3s;
 }
 </style>
