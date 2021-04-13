@@ -46,10 +46,10 @@ axios.interceptors.request.use(config => {//成功的拦截
  *
  */
 // 这里是axios一段配置，默认认为状态码>=200且 <300才算成功
-axios.defaults.validateStatus = status => {
-  //自定义响应成功的HTTP状态码
-  return /^(2|3)\d{2}$/.test(String(status))
-}
+// axios.defaults.validateStatus = status => {
+//   //自定义响应成功的HTTP状态码
+//   return /^(2|3)\d{2}$/.test(String(status))
+// }
 axios.interceptors.response.use((response) => {//response是返回的响应信息，主要有什么可以查看：http://axios-js.com/zh-cn/
   return response.data;
 }, error => {//这里状态码不是2开头的都会到这里
