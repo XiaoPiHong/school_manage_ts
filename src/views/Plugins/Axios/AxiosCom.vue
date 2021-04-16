@@ -3,13 +3,11 @@
 
     <Button type="primary" @click="test">点击请求</Button>
 
-    <table>
-      <transition-group name="table-list-move">
-        <tr v-for="(item,index) in list" :key="index" draggable="true" @dragstart="dragstart(item)" @dragend="dragend(item)" @dragenter="dragenter(item)">
-          <td class="pd10" :style="{'background-color':item.isSelect?'red':''}"><Input @mousedown.pervent.native="mouseDown(item,index,'title')" v-model="item.title"></Input></td>
-          <td class="pd10"><Input v-model="item.sex"></Input></td>
-        </tr>
-      </transition-group>
+    <table border="1">
+      <tr v-for="(item,index) in list" :key="index" draggable="true" @dragstart="dragstart(item)" @dragend="dragend(item)" @dragenter="dragenter(item)">
+        <td class="pd10" :style="{'background-color':item.isSelect?'red':''}"><Input @mousedown.pervent.native="mouseDown(item,index,'title')" v-model="item.title"></Input></td>
+        <td class="pd10"><Input v-model="item.sex"></Input></td>
+      </tr>
     </table>
 
   </Row>
@@ -34,7 +32,6 @@ export default class AxiosCom extends Vue {
       newItems.splice(newIndex, 0, this.oldItem)
 
       newItems.findIndex((item) => item === newIndex)
-      // this.list一改变，transition-group就起了作用
       this.list = [...newItems]
     }
   }
@@ -125,26 +122,20 @@ export default class AxiosCom extends Vue {
   private firstClickTitle: string = ''
   private checkIsHasSelect(where: string, index: number, type: string): void {}
   private docKeyDown(e: any): void {
+    document.removeEventListener('keydown', this.docKeyDown, false)
     if (e && e.keyCode == 16) {
       this.isShift = true
-      document.removeEventListener('keydown', this.docKeyDown, false)
       console.log(this.isShift)
     }
   }
   private docKeyUp(e: any): void {
+    document.addEventListener('keydown', this.docKeyDown, false)
     if (e && e.keyCode == 16) {
       this.isShift = false
-      document.addEventListener('keydown', this.docKeyDown, false)
       console.log(this.isShift)
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.pd10 {
-  padding: 10px;
-}
-.table-list-move {
-  transition: transform 0.3s;
-}
 </style>
