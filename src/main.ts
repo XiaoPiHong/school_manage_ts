@@ -7,7 +7,9 @@ import 'view-design/dist/styles/iview.css'
 import '@a/Theme/Index.less'
 
 import axios from './assets/Config/Http'
+import erpaxios from './assets/Config/Https-erp'
 Vue.prototype.$http = axios
+Vue.prototype.$erphttp = erpaxios
 
 Vue.config.productionTip = false
 Vue.use(ViewUI, {

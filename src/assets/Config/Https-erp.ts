@@ -29,6 +29,7 @@ axios.defaults.withCredentials = true;
  * 设置post请求头，告知服务器请求主体的数据格式
  */
 axios.defaults.headers['Content-Type'] = 'application/json';
+axios.defaults.transformRequest = data => JSON.stringify(data);
 /**
  * 设置请求拦截器,拦截器就是（客户端发请求-》请求拦截器-》服务器）
  * 一般请求的时候都要token校验（了解JWT算法）,请求的时候，客户端把token带上，服务器会校验我们带过去的token是否符合服务器的算法、规则，是的话才允许请求
@@ -68,7 +69,7 @@ axios.defaults.validateStatus = status => {
   return /^200$/.test(String(status))
 }
 axios.interceptors.response.use((response) => {//response是返回的响应信息，主要有什么可以查看：http://axios-js.com/zh-cn/
-  return response.data;
+  return response.data.json();
 }, error => {//这里状态码不是2开头的都会到这里
   let { response } = error//这里是解构赋值
   if (response) {//=》服务器返回结果了处理
@@ -79,7 +80,26 @@ axios.interceptors.response.use((response) => {//response是返回的响应信�
         break;
       case 404://=>找不到页面
         break;
+      case 407://=>刷新
+        break;
+      case 406://=>退出登陆
+        const userInfo = JSON.parse(vueCookie.get('frler_user'))
+        axios.post('http://xxx', '').then((res) => {
+          //1.清空cookie
+          if (userInfo) {
+            vueCookie.delete('frler_user', {
+              domain: (this as any).domain
+            });
+          }
+          //2.清空获取到的权限
+          /**.......... */
+        }).catch(() => {
+
+        })
+        break;
     }
+    const err = new Error(response.data.statusText)
+    throw err
   } else {//=》服务器连结果都没有返回（主要可能有两种情况：断网了/服务器崩了）
     //判断当前有无网络
     if (!window.navigator.onLine) {

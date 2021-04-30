@@ -1,15 +1,12 @@
 <template>
   <Row>
-
     <Button type="primary" @click="test">点击请求</Button>
-
     <table border="1">
       <tr v-for="(item,index) in list" :key="index" draggable="true" @dragstart="dragstart(item)" @dragend="dragend(item)" @dragenter="dragenter(item)">
-        <td class="pd10" :style="{'background-color':item.isSelect?'red':''}"><Input @mousedown.pervent.native="mouseDown(item,index,'title')" v-model="item.title"></Input></td>
-        <td class="pd10"><Input v-model="item.sex"></Input></td>
+        <td class="pd10">{{item.title}}</td>
+        <td class="pd10">{{item.sex}}</td>
       </tr>
     </table>
-
   </Row>
 </template>
 <script lang="ts">
@@ -42,39 +39,26 @@ export default class AxiosCom extends Vue {
     this.newItem = row
   }
 
-  private destroyed(): void {
-    document.removeEventListener('keydown', this.docKeyDown, false)
-    document.removeEventListener('keyup', this.docKeyUp, false)
-  }
-  private mounted(): void {
-    document.addEventListener('keydown', this.docKeyDown, false)
-    document.addEventListener('keyup', this.docKeyUp, false)
-  }
   private list: any = [
     {
       title: '1',
       sex: '男',
-      isSelect: false,
     },
     {
       title: '2',
-      sex: '男',
-      isSelect: false,
+      sex: '女',
     },
     {
       title: '3',
       sex: '男',
-      isSelect: false,
     },
     {
       title: '4',
-      sex: '男',
-      isSelect: false,
+      sex: 'gay',
     },
   ]
-  private isShift: boolean = false
   private test(): void {
-    ;(this as any).$http
+    ;(this as any).$erphttp
       .post('/user', {
         firstName: 'Fred',
         lastName: 'Flintstone',
@@ -85,55 +69,6 @@ export default class AxiosCom extends Vue {
       .catch(function (error: any) {
         console.log(error)
       })
-  }
-  private mouseDown(row: any, index: number, type: string): void {
-    if (this.isShift == true) {
-      if (this.firstClickTitle === '') {
-        this.$set(row, 'isSelect', true)
-        this.$set(this, 'firstClickTitle', `${index}`)
-        return
-      }
-      if (this.firstClickTitle !== '') {
-        if (index > Number(this.firstClickTitle)) {
-          for (let i = 0; i < this.list.length; i++) {
-            if (i >= Number(this.firstClickTitle) && i <= index) {
-              this.$set(this.list[i], 'isSelect', true)
-            } else {
-              this.$set(this.list[i], 'isSelect', false)
-            }
-          }
-        } else if (index == Number(this.firstClickTitle)) {
-          for (let i = 0; i < this.list.length; i++) {
-            this.$set(this.list[i], 'isSelect', false)
-            this.$set(this, 'firstClickTitle', '')
-          }
-        } else if (index < Number(this.firstClickTitle)) {
-          for (let i = 0; i < this.list.length; i++) {
-            if (i <= Number(this.firstClickTitle) && i >= index) {
-              this.$set(this.list[i], 'isSelect', true)
-            } else {
-              this.$set(this.list[i], 'isSelect', false)
-            }
-          }
-        }
-      }
-    }
-  }
-  private firstClickTitle: string = ''
-  private checkIsHasSelect(where: string, index: number, type: string): void {}
-  private docKeyDown(e: any): void {
-    document.removeEventListener('keydown', this.docKeyDown, false)
-    if (e && e.keyCode == 16) {
-      this.isShift = true
-      console.log(this.isShift)
-    }
-  }
-  private docKeyUp(e: any): void {
-    document.addEventListener('keydown', this.docKeyDown, false)
-    if (e && e.keyCode == 16) {
-      this.isShift = false
-      console.log(this.isShift)
-    }
   }
 }
 </script>
