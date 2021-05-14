@@ -82,9 +82,29 @@ export default class Home extends Vue {
       })
       return
     }
-    // 如果点击tabpane项是非当前，替换当前路由
+    let module = ''
+    switch (name) {
+      case 'Index':
+        module = '#/'
+        break
+      case 'ValidateForm':
+      case 'SelectCom':
+      case 'InputCom':
+      case 'InputNumberCom':
+        module = '#/Iview/'
+        break
+      case 'JoditCom':
+      case 'HistogramCom':
+      case 'AxiosCom':
+        module = '#/Plugins/'
+        break
+      case 'AsyncCom':
+        module = '#/JavaScript/'
+        break
+    }
+    // 如果点击tabpane项是非当前，跳转到指定的 url（浏览器还可以通过前进和后退回到之前的url）
     this.currentPane = name
-    this.$router.replace(`/${name}`)
+    window.location.href = module + name
   }
 
   // 关闭tabpane

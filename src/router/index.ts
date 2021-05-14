@@ -18,19 +18,19 @@ const routes: Array<RouteConfig> = [
     path: '/Iview',
     component: () => import('@v/Main/Home.vue'),
     children: [{
-      path: '/ValidateForm',
+      path: 'ValidateForm',
       name: 'ValidateForm',
       component: () => import('@v/Iview/Form/ValidateForm.vue')
     }, {
-      path: '/SelectCom',
+      path: 'SelectCom',
       name: 'SelectCom',
       component: () => import('@v/Iview/Form/SelectCom.vue')
     }, {
-      path: '/InputCom',
+      path: 'InputCom',
       name: 'InputCom',
       component: () => import('@v/Iview/Form/InputCom.vue')
     }, {
-      path: '/InputNumberCom',
+      path: 'InputNumberCom',
       name: 'InputNumberCom',
       component: () => import('@v/Iview/Form/InputNumberCom.vue')
     }]
@@ -40,15 +40,15 @@ const routes: Array<RouteConfig> = [
     path: '/Plugins',
     component: () => import('@v/Main/Home.vue'),
     children: [{
-      path: '/JoditCom',
+      path: 'JoditCom',
       name: 'JoditCom',
       component: () => import('@v/Plugins/RichTextEditor/JoditCom.vue')
     }, {
-      path: '/HistogramCom',
+      path: 'HistogramCom',
       name: 'HistogramCom',
       component: () => import('@v/Plugins/Echart/HistogramCom.vue')
     }, {
-      path: '/AxiosCom',
+      path: 'AxiosCom',
       name: 'AxiosCom',
       component: () => import('@v/Plugins/Axios/AxiosCom.vue')
     }]
@@ -58,7 +58,7 @@ const routes: Array<RouteConfig> = [
     path: '/JavaScript',
     component: () => import('@v/Main/Home.vue'),
     children: [{
-      path: '/AsyncCom',
+      path: 'AsyncCom',
       name: 'AsyncCom',
       component: () => import('@v/JavaScript/ES7/AsyncCom.vue')
     }]

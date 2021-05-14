@@ -20,7 +20,27 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class Nav extends Vue {
   // 选择菜单
   private topLevelMenu(name: string): void {
-    this.$router.replace(`/${name}`)
+    let module = ''
+    switch (name) {
+      case 'Index':
+        module = '#/'
+        break
+      case 'ValidateForm':
+      case 'SelectCom':
+      case 'InputCom':
+      case 'InputNumberCom':
+        module = '#/Iview/'
+        break
+      case 'JoditCom':
+      case 'HistogramCom':
+      case 'AxiosCom':
+        module = '#/Plugins/'
+        break
+      case 'AsyncCom':
+        module = '#/JavaScript/'
+        break
+    }
+    window.location.href = module + name
   }
 
   // 导航栏数据
