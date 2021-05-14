@@ -25,6 +25,9 @@
       <TabPane label="axios库测试页面" name="AxiosCom" v-if="AxiosCom" tab="homeTabs">
         <AxiosCom v-if="AxiosCom"></AxiosCom>
       </TabPane>
+      <TabPane label="async await" name="AsyncCom" v-if="AsyncCom" tab="homeTabs">
+        <AsyncCom v-if="AsyncCom"></AsyncCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -42,6 +45,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     JoditCom: () => import('@v/Plugins/RichTextEditor/JoditCom.vue'),
     HistogramCom: () => import('@v/Plugins/Echart/HistogramCom.vue'),
     AxiosCom: () => import('@v/Plugins/Axios/AxiosCom.vue'),
+    AsyncCom: () => import('@v/JavaScript/ES7/AsyncCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -105,6 +109,8 @@ export default class Home extends Vue {
   private JoditCom: boolean = false //Jodit富文本编辑器
   private HistogramCom: boolean = false //柱状图
   private AxiosCom: boolean = false //axios
+  //JavaScript模块
+  private AsyncCom: boolean = false //async和await
 }
 </script>
 <style lang="less" scoped>

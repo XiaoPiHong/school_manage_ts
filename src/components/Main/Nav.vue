@@ -89,6 +89,22 @@ export default class Nav extends Vue {
         },
       ],
     },
+    {
+      ResourceName: 'JavaScript',
+      ElementId: 'JavaScript',
+      ChildNodes: [
+        {
+          ResourceName: 'ES7',
+          ElementId: 'ES7',
+          ChildNodes: [
+            {
+              ResourceName: 'async',
+              ElementId: 'AsyncCom',
+            },
+          ],
+        },
+      ],
+    },
   ]
 }
 </script>

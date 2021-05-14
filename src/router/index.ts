@@ -52,6 +52,16 @@ const routes: Array<RouteConfig> = [
       name: 'AxiosCom',
       component: () => import('@v/Plugins/Axios/AxiosCom.vue')
     }]
+  },
+  //JavaScript模块
+  {
+    path: '/JavaScript',
+    component: () => import('@v/Main/Home.vue'),
+    children: [{
+      path: '/AsyncCom',
+      name: 'AsyncCom',
+      component: () => import('@v/JavaScript/ES7/AsyncCom.vue')
+    }]
   }
 ]
 
