@@ -88,7 +88,7 @@ axios.interceptors.response.use((response) => {//response是返回的响应信�
           //1.清空cookie
           if (userInfo) {
             vueCookie.delete('frler_user', {
-              domain: (this as any).domain
+              domain: window.location.hostname
             });
           }
           //2.清空获取到的权限
