@@ -28,6 +28,9 @@
       <TabPane label="async await" name="AsyncCom" v-if="AsyncCom" tab="homeTabs">
         <AsyncCom v-if="AsyncCom"></AsyncCom>
       </TabPane>
+      <TabPane label="render注意" name="RenderCom" v-if="RenderCom" tab="homeTabs">
+        <RenderCom v-if="RenderCom"></RenderCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -46,6 +49,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     HistogramCom: () => import('@v/Plugins/Echart/HistogramCom.vue'),
     AxiosCom: () => import('@v/Plugins/Axios/AxiosCom.vue'),
     AsyncCom: () => import('@v/JavaScript/ES7/AsyncCom.vue'),
+    RenderCom: () => import('@v/Iview/Table/RenderCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -91,6 +95,7 @@ export default class Home extends Vue {
       case 'SelectCom':
       case 'InputCom':
       case 'InputNumberCom':
+      case 'RenderCom':
         module = '#/Iview/'
         break
       case 'JoditCom':
@@ -125,6 +130,7 @@ export default class Home extends Vue {
   private SelectCom: boolean = false //Select组件
   private InputCom: boolean = false //Input组件
   private InputNumberCom: boolean = false //InputNumber组件
+  private RenderCom: boolean = false //表格中render
   // 插件模块
   private JoditCom: boolean = false //Jodit富文本编辑器
   private HistogramCom: boolean = false //柱状图

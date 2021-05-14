@@ -63,7 +63,7 @@ module.exports = {
     //   'subdomain2.host.com',
     //   'host2.com'
     // ],//该选项允许将允许访问开发服务器的服务列入白名单,不在名单中的不可以访问
-    hot: false,//开启热模块替换（默认不写就是开启）
+    hot: true,//开启热模块替换（默认不写就是开启）
     // hotOnly: true,//在编译失败/成功的情况下，启用热模块替换，而不刷新页面作为回退（注意：hotOnly: true/false一定要搭配hot: false使用的，否则如果不写hot: true或则写了hot: true都是无论是编译失败或则成功了都启用热模块替换，怎么都不会进行刷新页面）
     proxy: null,//API跨域请求代理（会把默认域名http://localhost:8081地址改成 target 对应的http://www.test.com地址，但是在浏览器的F12下，Network->Headers中看到还是http://localhost:8081/allin/policy/getProductInfo， 但是真正的请求的地址则是http://www.test.com/allin/policy/getProductInfo。上面的参数列表中有一个changeOrigin参数, 是一个布尔值, 设置为true, 本地就会虚拟一个服务器接收你的请求并代你发送该请求，解决跨域问题，详情使用查看：https://www.cnblogs.com/liuguiqian/p/11362211.html）
   }

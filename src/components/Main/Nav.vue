@@ -29,6 +29,7 @@ export default class Nav extends Vue {
       case 'SelectCom':
       case 'InputCom':
       case 'InputNumberCom':
+      case 'RenderCom':
         module = '#/Iview/'
         break
       case 'JoditCom':
@@ -68,6 +69,16 @@ export default class Nav extends Vue {
             {
               ResourceName: 'InputNumber组件注意点',
               ElementId: 'InputNumberCom',
+            },
+          ],
+        },
+        {
+          ResourceName: '表格',
+          ElementId: 'Table',
+          ChildNodes: [
+            {
+              ResourceName: 'render注意',
+              ElementId: 'RenderCom',
             },
           ],
         },

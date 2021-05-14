@@ -33,6 +33,10 @@ const routes: Array<RouteConfig> = [
       path: 'InputNumberCom',
       name: 'InputNumberCom',
       component: () => import('@v/Iview/Form/InputNumberCom.vue')
+    }, {
+      path: 'RenderCom',
+      name: 'RenderCom',
+      component: () => import('@v/Iview/Table/RenderCom.vue')
     }]
   },
   //插件模块
