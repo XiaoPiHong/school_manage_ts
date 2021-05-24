@@ -10,6 +10,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import Interface from '@/assets/Interface/Iview'
 @Component({
   name: 'RenderCom',
   components: {},
@@ -19,7 +20,7 @@ export default class Com extends Vue {
   private test(): void {
     console.log(this.data)
   }
-  private data: any[] = [
+  private data: Interface.RenderComList[] = [
     {
       Id: 1,
       cols2: 'test',
@@ -94,10 +95,15 @@ export default class Com extends Vue {
           },
           on: {
             'on-change': (e: any) => {
-              this.validateNumber(e, this.data[params.row._index], 'cols3')
+              // e row name 最大值 允许最大位数
+              this.validateNumber( e, this.data[params.row._index], 'cols3', 99, 1 )
             },
             input: (value: string) => {
               this.changeInput(value, params.row._index)
+            },
+            'on-blur': () => {
+              if (this.data[params.row._index].cols3 === '') return
+              this.$set( this.data[params.row._index], 'cols3', parseFloat(this.data[params.row._index].cols3) )
             },
           },
         })
@@ -111,7 +117,7 @@ export default class Com extends Vue {
           'Select',
           {
             props: {
-              placeholder: '请选择刊登模板',
+              placeholder: '请选择内容',
               filterable: true,
               clearable: true,
               value: params.row.cols4,
@@ -159,36 +165,20 @@ export default class Com extends Vue {
   private changeSelect(val: any, index: number) {
     this.data[index].cols4 = val
   }
-  private validateNumber(event: any, row: any, type: string) {
+  // [0,max(最大值为99999999999999)]的数字，最多[1,bitNumber]位小数
+  private validateNumber( event: any, row: any, type: string, max: number, bitNumber: number ) {
     let val = event.target.value
     this.$nextTick(() => {
-      if (
-        (isNaN(Number(event.data)) && event.data !== '.') ||
-        val.split('.').length - 1 > 1 ||
-        val === '.'
-      ) {
+      if ( (isNaN(Number(event.data)) && event.data !== '.') || val.split('.').length - 1 > 1 || val === '.' ) {
         this.$set(row == 1 ? this : row, type, '')
-      } else if (
-        Number(val < 0) ||
-        Number(val > 10000000000000) ||
-        event.data === ' ' ||
-        isNaN(Number(val))
-      ) {
+      } else if ( Number(val < 0) || Number(val > 99999999999999) || event.data === ' ' || isNaN(Number(val)) ) {
         this.$set(row == 1 ? this : row, type, 0)
-      } else if (
-        (val[0] === '.' && val[1] !== '.' && val.length > 1) ||
-        (val[0] === '0' && val[1] !== '.' && val.length > 1)
-      ) {
-        this.$set(row == 1 ? this : row, type, Number(val))
-      } else if (
-        val.indexOf('.') > 0 &&
-        val.length - (val.indexOf('.') + 1) > 3
-      ) {
-        this.$set(
-          row == 1 ? this : row,
-          type,
-          val.slice(0, val.indexOf('.') + 4)
-        )
+      } else if (Number(val > max)) {
+        this.$set(row == 1 ? this : row, type, max)
+      } else if ( (val[0] === '.' && val[1] !== '.' && val.length > 1) || (val[0] === '0' && val[1] !== '.' && val.length > 1) ) {
+        this.$set( row == 1 ? this : row, type, String(Number(val)).slice(0, 2 + bitNumber) )
+      } else if ( val.indexOf('.') > 0 && val.length - (val.indexOf('.') + 1) > bitNumber ) {
+        this.$set( row == 1 ? this : row, type, val.slice(0, val.indexOf('.') + bitNumber + 1) )
       } else {
         this.$set(row == 1 ? this : row, type, val)
       }

@@ -148,6 +148,7 @@ export default class AxiosCom extends Vue {
 }
 
 table {
+  border-spacing: 0;
   border-collapse: collapse;
   table-layout: fixed;
   width: 100%;

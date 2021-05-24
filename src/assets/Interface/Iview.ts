@@ -17,5 +17,12 @@ namespace Iview {
   export class InputNumberForm {
     num: number | null = null
   }
+
+  export interface RenderComList {
+    Id: number,
+    cols2: string,
+    cols3: string,
+    cols4: string,
+  }
 }
 export default Iview
