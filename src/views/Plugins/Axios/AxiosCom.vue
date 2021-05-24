@@ -9,12 +9,12 @@
             <th>sex</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(item,index) in list" :key="index" draggable="true" @dragstart="dragstart(item)" @dragend="dragend(item)" @dragenter="dragenter(item)">
+        <transition-group name="table-list" tag="tbody">
+          <tr v-for="(item,index) in list" :key="item.Id" draggable="true" @dragstart="dragstart(item)" @dragend="dragend(item)" @dragenter="dragenter(item)">
             <td class="pd10"><Input v-model="item.sex"></Input></td>
             <td class="pd10"><Input v-model="item.title"></Input></td>
           </tr>
-        </tbody>
+        </transition-group>
       </table>
     </div>
   </Row>
@@ -51,74 +51,92 @@ export default class AxiosCom extends Vue {
 
   private list: any = [
     {
+      Id: 1,
       title: '1',
       sex: '男',
     },
     {
+      Id: 2,
       title: '2',
       sex: '女',
     },
     {
+      Id: 3,
       title: '3',
       sex: '男',
     },
     {
+      Id: 4,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 5,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 6,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 7,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 8,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 9,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 10,
       title: '1',
       sex: '男',
     },
     {
+      Id: 11,
       title: '2',
       sex: '女',
     },
     {
+      Id: 12,
       title: '3',
       sex: '男',
     },
     {
+      Id: 13,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 14,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 15,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 16,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 17,
       title: '4',
       sex: 'gay',
     },
     {
+      Id: 18,
       title: '4',
       sex: 'gay',
     },
@@ -160,7 +178,9 @@ table {
     min-width: 100px;
   }
   td {
-    border: 1px solid #dcdee2;
+    border-top: 1px solid #dcdee2;
+    border-right: 1px solid #dcdee2;
+    border-bottom: 1px solid #dcdee2;
   }
 
   thead tr th {
@@ -179,5 +199,8 @@ table {
     -ms-user-select: none;
     user-select: none;
   }
+}
+.table-list-move {
+  transition: transform 0.3s;
 }
 </style>
