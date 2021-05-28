@@ -1,10 +1,27 @@
 <template>
-  <Row class="mt10">
+  <Row class="mt10 mb10">
+    <Col :span="24" class="mt10">
+    <Button type="primary" @click="test">点击获取表格数据</Button>
+    </Col>
     <Col :span="24" class="mt10">
     <Table :columns="cols" :data="data" :height="400"></Table>
     </Col>
     <Col :span="24" class="mt10">
-    <Button type="primary" @click="test">test</Button>
+    <div style="display:flex;">
+      <div style="flex:1;">
+        <p>1.iview2.x在Table组件中使用render函数渲染Input或Select或InputeNumber组件,每当改变表格数据时，都会引发整个表格渲染（就会引发输入时失焦问题）</p>
+        <p>2.<span class="f-color-red">解决上述问题的办法就是：</span>先更新params.row.xxx，再将tableData进行整行更新。这样就不会导致Table进行重新渲染。</p>
+        <img src="../../../assets/Images/note/table_render_1.png" alt="">
+      </div>
+      <div style="flex:1;">
+        <p>3.<span class="f-color-red">注意：</span>如果当用户需要对tableData进行监控，采用上面的方法会导致vue无法监控到tableData内数据的变化（实际上是发生了变化），这样我们不能通过常规的watch或者时computer对数据进行监控。<span class="f-color-red">解决方法：</span>采用html的失去焦点事件，当Input组件失去焦点时，对某个数据进行更新，从而达到数据一致。</p>
+        <img src="../../../assets/Images/note/table_render_2.png" alt="">
+      </div>
+    </div>
+    </Col>
+    <Col :span="24">
+    <p>4.iview4.x使用Table组件，改变表格数据时，不会发生整个表格重新渲染的问题，所以不会产生像2.x那样的问题</p>
+    <p>5.以上问题可以观看文章：<a href="https://blog.csdn.net/weixin_38881817/article/details/85112887" target="_blank">点击跳转</a></p>
     </Col>
   </Row>
 </template>
@@ -96,14 +113,24 @@ export default class Com extends Vue {
           on: {
             'on-change': (e: any) => {
               // e row name 最大值 允许最大位数
-              this.validateNumber( e, this.data[params.row._index], 'cols3', 99, 1 )
+              this.validateNumber(
+                e,
+                this.data[params.row._index],
+                'cols3',
+                99,
+                1
+              )
             },
             input: (value: string) => {
               this.changeInput(value, params.row._index)
             },
             'on-blur': () => {
               if (this.data[params.row._index].cols3 === '') return
-              this.$set( this.data[params.row._index], 'cols3', parseFloat(this.data[params.row._index].cols3) )
+              this.$set(
+                this.data[params.row._index],
+                'cols3',
+                parseFloat(this.data[params.row._index].cols3)
+              )
             },
           },
         })
@@ -166,19 +193,48 @@ export default class Com extends Vue {
     this.data[index].cols4 = val
   }
   // [0,max(最大值为99999999999999)]的数字，最多[1,bitNumber]位小数
-  private validateNumber( event: any, row: any, type: string, max: number, bitNumber: number ) {
+  private validateNumber(
+    event: any,
+    row: any,
+    type: string,
+    max: number,
+    bitNumber: number
+  ) {
     let val = event.target.value
     this.$nextTick(() => {
-      if ( (isNaN(Number(event.data)) && event.data !== '.') || val.split('.').length - 1 > 1 || val === '.' ) {
+      if (
+        (isNaN(Number(event.data)) && event.data !== '.') ||
+        val.split('.').length - 1 > 1 ||
+        val === '.'
+      ) {
         this.$set(row == 1 ? this : row, type, '')
-      } else if ( Number(val < 0) || Number(val > 99999999999999) || event.data === ' ' || isNaN(Number(val)) ) {
+      } else if (
+        Number(val < 0) ||
+        Number(val > 99999999999999) ||
+        event.data === ' ' ||
+        isNaN(Number(val))
+      ) {
         this.$set(row == 1 ? this : row, type, 0)
       } else if (Number(val > max)) {
         this.$set(row == 1 ? this : row, type, max)
-      } else if ( (val[0] === '.' && val[1] !== '.' && val.length > 1) || (val[0] === '0' && val[1] !== '.' && val.length > 1) ) {
-        this.$set( row == 1 ? this : row, type, String(Number(val)).slice(0, 2 + bitNumber) )
-      } else if ( val.indexOf('.') > 0 && val.length - (val.indexOf('.') + 1) > bitNumber ) {
-        this.$set( row == 1 ? this : row, type, val.slice(0, val.indexOf('.') + bitNumber + 1) )
+      } else if (
+        (val[0] === '.' && val[1] !== '.' && val.length > 1) ||
+        (val[0] === '0' && val[1] !== '.' && val.length > 1)
+      ) {
+        this.$set(
+          row == 1 ? this : row,
+          type,
+          String(Number(val)).slice(0, 2 + bitNumber)
+        )
+      } else if (
+        val.indexOf('.') > 0 &&
+        val.length - (val.indexOf('.') + 1) > bitNumber
+      ) {
+        this.$set(
+          row == 1 ? this : row,
+          type,
+          val.slice(0, val.indexOf('.') + bitNumber + 1)
+        )
       } else {
         this.$set(row == 1 ? this : row, type, val)
       }
