@@ -31,6 +31,9 @@
       <TabPane label="render注意" name="RenderCom" v-if="RenderCom" tab="homeTabs">
         <RenderCom v-if="RenderCom"></RenderCom>
       </TabPane>
+      <TabPane label="js类型验证" name="JudgmentTypeCom" v-if="JudgmentTypeCom" tab="homeTabs">
+        <JudgmentTypeCom v-if="JudgmentTypeCom"></JudgmentTypeCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -50,6 +53,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     AxiosCom: () => import('@v/Plugins/Axios/AxiosCom.vue'),
     AsyncCom: () => import('@v/JavaScript/ES7/AsyncCom.vue'),
     RenderCom: () => import('@v/Iview/Table/RenderCom.vue'),
+    JudgmentTypeCom: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -104,6 +108,7 @@ export default class Home extends Vue {
         module = '#/Plugins/'
         break
       case 'AsyncCom':
+      case 'JudgmentTypeCom':
         module = '#/JavaScript/'
         break
     }
@@ -137,6 +142,7 @@ export default class Home extends Vue {
   private AxiosCom: boolean = false //axios
   //JavaScript模块
   private AsyncCom: boolean = false //async和await
+  private JudgmentTypeCom: boolean = false //js类型验证
 }
 </script>
 <style lang="less" scoped>

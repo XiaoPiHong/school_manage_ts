@@ -38,6 +38,7 @@ export default class Nav extends Vue {
         module = '#/Plugins/'
         break
       case 'AsyncCom':
+      case 'JudgmentTypeCom':
         module = '#/JavaScript/'
         break
     }
@@ -131,6 +132,16 @@ export default class Nav extends Vue {
             {
               ResourceName: 'async',
               ElementId: 'AsyncCom',
+            },
+          ],
+        },
+        {
+          ResourceName: 'ES5',
+          ElementId: 'ES5',
+          ChildNodes: [
+            {
+              ResourceName: 'js类型验证',
+              ElementId: 'JudgmentTypeCom',
             },
           ],
         },

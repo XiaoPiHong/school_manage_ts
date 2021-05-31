@@ -65,6 +65,10 @@ const routes: Array<RouteConfig> = [
       path: 'AsyncCom',
       name: 'AsyncCom',
       component: () => import('@v/JavaScript/ES7/AsyncCom.vue')
+    }, {
+      path: 'JudgmentTypeCom',
+      name: 'JudgmentTypeCom',
+      component: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue')
     }]
   }
 ]
