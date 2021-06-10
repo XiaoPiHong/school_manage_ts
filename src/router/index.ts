@@ -13,9 +13,15 @@ const routes: Array<RouteConfig> = [
     name: 'Index',
     component: () => import('@v/Main/Home.vue')
   },
+  {
+    path: '/Error404',
+    name: 'Error404',
+    component: () => import('@v/Main/404.vue')
+  },
   //iview知识模块
   {
     path: '/Iview',
+    redirect: '/Error404',
     component: () => import('@v/Main/Home.vue'),
     children: [{
       path: 'ValidateForm',
@@ -42,6 +48,7 @@ const routes: Array<RouteConfig> = [
   //插件模块
   {
     path: '/Plugins',
+    redirect: '/Error404',
     component: () => import('@v/Main/Home.vue'),
     children: [{
       path: 'JoditCom',
@@ -60,6 +67,7 @@ const routes: Array<RouteConfig> = [
   //JavaScript模块
   {
     path: '/JavaScript',
+    redirect: '/Error404',
     component: () => import('@v/Main/Home.vue'),
     children: [{
       path: 'AsyncCom',
@@ -70,11 +78,21 @@ const routes: Array<RouteConfig> = [
       name: 'JudgmentTypeCom',
       component: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue')
     }]
+  },
+  //404页面，写在最后
+  {
+    path: '*',
+    redirect: '/Error404',
+    component: () => import('@v/Main/404.vue')
   }
 ]
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  next()
 })
 
 export default router
