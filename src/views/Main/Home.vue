@@ -34,6 +34,9 @@
       <TabPane label="js类型验证" name="JudgmentTypeCom" v-if="JudgmentTypeCom" tab="homeTabs">
         <JudgmentTypeCom v-if="JudgmentTypeCom"></JudgmentTypeCom>
       </TabPane>
+      <TabPane label="路由传参" name="RouterPassCom" v-if="RouterPassCom" tab="homeTabs">
+        <RouterPassCom v-if="RouterPassCom"></RouterPassCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -54,6 +57,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     AsyncCom: () => import('@v/JavaScript/ES7/AsyncCom.vue'),
     RenderCom: () => import('@v/Iview/Table/RenderCom.vue'),
     JudgmentTypeCom: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue'),
+    RouterPassCom: () => import('@v/Vue/VueRouter/RouterPassCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -111,6 +115,9 @@ export default class Home extends Vue {
       case 'JudgmentTypeCom':
         module = '#/JavaScript/'
         break
+      case 'RouterPassCom':
+        module = '#/Vue/'
+        break
     }
     // 如果点击tabpane项是非当前，跳转到指定的 url（浏览器还可以通过前进和后退回到之前的url）
     this.currentPane = name
@@ -143,6 +150,8 @@ export default class Home extends Vue {
   //JavaScript模块
   private AsyncCom: boolean = false //async和await
   private JudgmentTypeCom: boolean = false //js类型验证
+  //Vue模块
+  private RouterPassCom: boolean = false //路由传参
 }
 </script>
 <style lang="less" scoped>

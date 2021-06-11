@@ -79,6 +79,17 @@ const routes: Array<RouteConfig> = [
       component: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue')
     }]
   },
+  //Vue模块
+  {
+    path: '/Vue',
+    redirect: '/Error404',
+    component: () => import('@v/Main/Home.vue'),
+    children: [{
+      path: 'RouterPassCom',
+      name: 'RouterPassCom',
+      component: () => import('@v/Vue/VueRouter/RouterPassCom.vue')
+    }]
+  },
   //404页面，写在最后
   {
     path: '*',

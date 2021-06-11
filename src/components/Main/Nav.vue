@@ -40,6 +40,9 @@ export default class Nav extends Vue {
       case 'AsyncCom':
       case 'JudgmentTypeCom':
         module = '#/JavaScript/'
+        break;
+      case 'RouterPassCom':
+        module = '#/Vue/'
         break
     }
     window.location.href = module + name
@@ -142,6 +145,22 @@ export default class Nav extends Vue {
             {
               ResourceName: 'js类型验证',
               ElementId: 'JudgmentTypeCom',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      ResourceName: 'Vue',
+      ElementId: 'Vue',
+      ChildNodes: [
+        {
+          ResourceName: '路由',
+          ElementId: 'VueRouter',
+          ChildNodes: [
+            {
+              ResourceName: '路由传参',
+              ElementId: 'RouterPassCom',
             },
           ],
         },
