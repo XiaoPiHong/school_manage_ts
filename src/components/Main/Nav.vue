@@ -1,10 +1,12 @@
 <template>
   <Row>
     <Menu mode="horizontal" theme="primary" @on-select="topLevelMenu">
-      <Submenu v-for="(item,index) in NavsTree" :name="index" :key="index">
+      <Submenu v-for="(item,index) in NavsTree" :name="index" :key="item.ElementId">
         <template slot="title">{{item.ResourceName}}</template>
-        <MenuGroup v-for="(itm,ind) in item.ChildNodes" :key="ind" :title="itm.ResourceName">
-          <MenuItem v-for="(it,idx) in itm.ChildNodes" :key="idx" :name="it.ElementId">{{it.ResourceName}}</MenuItem>
+        <MenuGroup v-for="(itm,ind) in item.ChildNodes" :key="itm.ElementId" :title="itm.ResourceName">
+          <!-- to属性路由跳转时：使用router对象name属性跳转，如果没有该name属性对应的路由，抛出警告后不会验证404的路由 -->
+          <!-- to属性路由跳转时：使用router对象path属性跳转，如果没有该path属性对应的路由，会跳转到404的路由 -->
+          <MenuItem v-for="(it,idx) in itm.ChildNodes" :key="it.ElementId" :name="it.ElementId" :to="{path:`/${item.ElementId}/${it.ElementId}`}">{{it.ResourceName}}</MenuItem>
         </MenuGroup>
       </Submenu>
     </Menu>
@@ -19,34 +21,7 @@ import { Component, Vue } from 'vue-property-decorator'
 })
 export default class Nav extends Vue {
   // 选择菜单
-  private topLevelMenu(name: string): void {
-    let module = ''
-    switch (name) {
-      case 'Index':
-        module = '#/'
-        break
-      case 'ValidateForm':
-      case 'SelectCom':
-      case 'InputCom':
-      case 'InputNumberCom':
-      case 'RenderCom':
-        module = '#/Iview/'
-        break
-      case 'JoditCom':
-      case 'HistogramCom':
-      case 'AxiosCom':
-        module = '#/Plugins/'
-        break
-      case 'AsyncCom':
-      case 'JudgmentTypeCom':
-        module = '#/JavaScript/'
-        break;
-      case 'RouterPassCom':
-        module = '#/Vue/'
-        break
-    }
-    window.location.href = module + name
-  }
+  private topLevelMenu(name: string): void {}
 
   // 导航栏数据
   private NavsTree: any[] = [
