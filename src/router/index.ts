@@ -90,6 +90,11 @@ const routes: Array<RouteConfig> = [
       component: () => import('@v/Vue/VueRouter/RouterPassCom.vue')
     }]
   },
+  {//测试路由传参
+    path: '/TestRouterParamsCom/:name/:age',
+    name: 'TestRouterParamsCom',
+    component: () => import('@v/Vue/VueRouter/TestRouterParamsCom.vue')
+  },
   //404页面，写在最后
   {
     path: '*',

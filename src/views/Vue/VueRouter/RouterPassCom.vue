@@ -20,6 +20,17 @@
     <p>1.router是VueRouter的一个对象，通过Vue.use(VueRouter)和VueRouter构造函数得到一个router的实例对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。</p>
     <p>2.route是一个跳转的路由对象，每一个路由都会有一个route对象，是一个局部的对象，可以获取对应的name,path,params,query等。</p>
     </Col>
+    <Col span="24">
+    <h1>四、路由跳转</h1>
+    <router-link :to="{name:'JoditCom',query:{name:'test',age:11}}" tag="Button">router-link跳转(query传参)</router-link>
+    <router-link :to="{name:'TestRouterParamsCom',params:{name:'test',age:11}}" tag="Button">router-link跳转(params传参)</router-link>
+    <router-link :to="{name:'JoditCom',query:{name:'test',age:11}}" replace tag="Button">router-link replace 跳转(query传参)</router-link>
+    <br>
+    <Button type="primary" @click="goOtherPage(1)">push的query传参跳转</Button>
+    <Button type="primary" @click="goOtherPage(2)">push的params传参跳转</Button>
+    <Button type="primary" @click="goOtherPage(3)">replace的query传参跳转</Button>
+    <Button type="primary" @click="goOtherPage(4)">replace的params传参跳转</Button>
+    </Col>
   </Row>
 </template>
 <script lang="ts">
@@ -28,7 +39,36 @@ import { Component, Vue } from 'vue-property-decorator'
   name: 'RouterPassCom',
   components: {},
 })
-export default class RouterPassCom extends Vue {}
+export default class RouterPassCom extends Vue {
+  private goOtherPage(index: number): void {
+    switch (index) {
+      case 1:
+        this.$router.push({
+          name: 'JoditCom',
+          query: { name: 'test', age: '11' },
+        })
+        break
+      case 2:
+        this.$router.push({
+          name: 'TestRouterParamsCom',
+          params: { name: 'test', age: '11' },
+        })
+        break
+      case 3:
+        this.$router.replace({
+          name: 'JoditCom',
+          query: { name: 'test', age: '11' },
+        })
+        break
+      case 4:
+        this.$router.replace({
+          name: 'TestRouterParamsCom',
+          params: { name: 'test', age: '11' },
+        })
+        break
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 </style>
