@@ -93,7 +93,11 @@ const routes: Array<RouteConfig> = [
   {//测试路由传参
     path: '/TestRouterParamsCom/:name/:age',
     name: 'TestRouterParamsCom',
-    component: () => import('@v/Vue/VueRouter/TestRouterParamsCom.vue')
+    component: () => import('@v/Vue/VueRouter/TestRouterParamsCom.vue'),
+    props: ($route) => ({
+      myname: $route.params.name,
+      myage: $route.params.age
+    })
   },
   //404页面，写在最后
   {

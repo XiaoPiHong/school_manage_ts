@@ -1,11 +1,12 @@
 <template>
   <Row class="pd10">
     <Col span="24">
-    <h1>一、路由模式：</h1>
+    <h1>一、路由模式</h1>
     <p>1.路由一共有两种模式：1.history模式；2.hash模式。</p>
     <p>2.两种路由最主要的区别是hash路由带一个#。</p>
-    <p>3.而要使用history路由还需要后台的配合（如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，这个页面就是你 app 依赖的页面），否则会返回 404 错误。</p>
-    <p>4.history利用的是 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。</p>
+    <p>3.而要使用history路由还需要运维的配合（如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，也就是说匹配任何路由都应该返回的是index.html页面，这个页面就是你 app 依赖的页面），否则会返回 404 错误。</p>
+    <p>4.history利用的是 HTML5 History Interface 中新增的 【pushState()】 和 【replaceState()】 和 【onpopstate()监听浏览器前进后退】方法来进行视图渲染。</p>
+    <p>5.hash模式路由原理是利用了浏览器的【onhashchange()监听浏览器location.hash的变化】方法来进行视图渲染。</p>
     </Col>
     <Col span="24">
     <h1>二、路由传参的方式</h1>
@@ -28,8 +29,31 @@
     <br>
     <Button type="primary" @click="goOtherPage(1)">push的query传参跳转</Button>
     <Button type="primary" @click="goOtherPage(2)">push的params传参跳转</Button>
-    <Button type="primary" @click="goOtherPage(3)">replace的query传参跳转</Button>
-    <Button type="primary" @click="goOtherPage(4)">replace的params传参跳转</Button>
+    <br>
+    <Button type="success" @click="goOtherPage(3)">replace的query传参跳转</Button>
+    <Button type="success" @click="goOtherPage(4)">replace的params传参跳转</Button>
+    </Col>
+    <Col span="24">
+    <h1>五、路由参数获取</h1>
+    <p>1.query方式传递的参数可以直接在页面中：this.$route.query.xxx来获取</p>
+    <p>2.params方式传递的参数可以直接在页面中：this.$route.params.xxx来获取</p>
+    <div>
+      3.在router对象中使用props属性：
+      <div class="ml10">
+        1、在路由中设置：
+        <div class="ml10">
+          (1)props:true；
+          <br>
+          (2)props:{键名1:true,键名2:false}; 当true时传递对应参数；
+          <br>
+          (3)props:($route)=>( {接收键名:$route.query.参数键名 })；
+        </div>
+        2、在路由对应组件中：
+        <p class="ml10">props:['键名']；</p>
+        3、调用：
+        <p class="ml10">直接使用键名,和组件参数使用一样；</p>
+      </div>
+    </div>
     </Col>
   </Row>
 </template>
