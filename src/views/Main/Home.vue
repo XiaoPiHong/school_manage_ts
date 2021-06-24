@@ -87,6 +87,9 @@ export default class Home extends Vue {
   private changeRoute(name: string): void {
     // 如果点击的tabpane项是当前，则刷新当前页面
     if (name == this.$route.name) {
+      if (name === 'Index') {
+        return
+      }
       // 刷新当前tabpane
       ;(this as any)[name] = false
       this.$nextTick(() => {
@@ -94,34 +97,9 @@ export default class Home extends Vue {
       })
       return
     }
-    let module = ''
-    switch (name) {
-      case 'Index':
-        module = '#/'
-        break
-      case 'ValidateForm':
-      case 'SelectCom':
-      case 'InputCom':
-      case 'InputNumberCom':
-      case 'RenderCom':
-        module = '#/Iview/'
-        break
-      case 'JoditCom':
-      case 'HistogramCom':
-      case 'AxiosCom':
-        module = '#/Plugins/'
-        break
-      case 'AsyncCom':
-      case 'JudgmentTypeCom':
-        module = '#/JavaScript/'
-        break
-      case 'RouterPassCom':
-        module = '#/Vue/'
-        break
-    }
     // 如果点击tabpane项是非当前，跳转到指定的 url（浏览器还可以通过前进和后退回到之前的url）
     this.currentPane = name
-    window.location.href = module + name
+    this.$router.push({ name: name })
   }
 
   // 关闭tabpane
