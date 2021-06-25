@@ -88,6 +88,10 @@ const routes: Array<RouteConfig> = [
       path: 'RouterPassCom',
       name: 'RouterPassCom',
       component: () => import('@v/Vue/VueRouter/RouterPassCom.vue')
+    }, {
+      path: 'GettersCom',
+      name: 'GettersCom',
+      component: () => import('@v/Vue/Vuex/GettersCom.vue')
     }]
   },
   {//测试路由传参

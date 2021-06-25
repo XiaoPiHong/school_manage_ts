@@ -139,6 +139,16 @@ export default class Nav extends Vue {
             },
           ],
         },
+        {
+          ResourceName: '状态管理',
+          ElementId: 'Vuex',
+          ChildNodes: [
+            {
+              ResourceName: 'Getters的使用',
+              ElementId: 'GettersCom',
+            },
+          ],
+        },
       ],
     },
   ]
