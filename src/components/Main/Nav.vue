@@ -1,6 +1,6 @@
 <template>
   <Row>
-    <Menu mode="horizontal" theme="primary" @on-select="topLevelMenu">
+    <Menu mode="horizontal" theme="primary" @on-select="topLevelMenu" :active-name="$route.name">
       <Submenu v-for="(item,index) in NavsTree" :name="index" :key="item.ElementId">
         <template slot="title">{{item.ResourceName}}</template>
         <MenuGroup v-for="(itm,ind) in item.ChildNodes" :key="itm.ElementId" :title="itm.ResourceName">
