@@ -8,9 +8,10 @@ import '@a/Theme/Index.less'
 
 import axios from './assets/Config/Http'
 import erpaxios from './assets/Config/Https-erp'
+import server from './assets/Config/Server'
 Vue.prototype.$http = axios
 Vue.prototype.$erphttp = erpaxios
-
+Vue.prototype.$server = server
 Vue.config.productionTip = false
 Vue.use(ViewUI, {
   transfer: true // 所有带浮层的组件，将浮层放置在 body 内

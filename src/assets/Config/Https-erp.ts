@@ -1,25 +1,7 @@
 import axios from 'axios';
-import { OnlineServer, TestServer, DevelopServer } from './Server'
 const vueCookie = require('vue-cookie');
 const md5 = require('md5')
 
-/**
- * 根据环境变量区分接口的默认地址
- */
-let Server: any = null
-switch (process.env.NODE_ENV) {
-  // 生产环境（部署到服务器的环境）
-  case "production":
-    Server = OnlineServer
-    break;
-  // 测试环境
-  case "test":
-    Server = TestServer
-    break;
-  // 默认环境（开发环境）
-  default:
-    Server = DevelopServer
-}
 /**
  * 设置超时时间和跨域是否允许携带凭证
  */
