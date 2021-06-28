@@ -83,7 +83,7 @@ export default class Home extends Vue {
 
   //打开对应页面tabpane
   private openTabPane(name: string): void {
-    ;(this as any)[name] = true
+    ;(this as Vue)[name] = true
     this.currentPane = name
   }
 
@@ -95,9 +95,9 @@ export default class Home extends Vue {
         return
       }
       // 刷新当前tabpane
-      ;(this as any)[name] = false
+      ;(this as Vue)[name] = false
       this.$nextTick(() => {
-        ;(this as any)[name] = true
+        ;(this as Vue)[name] = true
       })
       return
     }
@@ -108,7 +108,7 @@ export default class Home extends Vue {
 
   // 关闭tabpane
   private handleTabRemove(name: string): void {
-    ;(this as any)[name] = false
+    ;(this as Vue)[name] = false
     if (name === this.$route.name) {
       this.$nextTick(() => {
         this.changeRoute((this.$refs.tabsRef as any).activeKey)

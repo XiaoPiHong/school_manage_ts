@@ -142,8 +142,8 @@ export default class AxiosCom extends Vue {
     },
   ]
   private test(): void {
-    ;(this as any).$erphttp
-      .post((this as any).$server.productServer + '/api/user', {
+    ;(this as Vue).$erphttp
+      .post((this as Vue).$server.productServer + '/api/user', {
         firstName: 'Fred',
         lastName: 'Flintstone',
       })
