@@ -149,6 +149,16 @@ export default class Nav extends Vue {
             },
           ],
         },
+        {
+          ResourceName: '指令',
+          ElementId: 'Instruction',
+          ChildNodes: [
+            {
+              ResourceName: 'v-model指令原理',
+              ElementId: 'VmodelCom',
+            },
+          ],
+        },
       ],
     },
   ]

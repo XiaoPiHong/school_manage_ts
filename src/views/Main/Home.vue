@@ -40,6 +40,9 @@
       <TabPane label="Vuex的使用" name="VuexCom" v-if="VuexCom" tab="homeTabs">
         <VuexCom v-if="VuexCom"></VuexCom>
       </TabPane>
+      <TabPane label="v-model指令原理" name="VmodelCom" v-if="VmodelCom" tab="homeTabs">
+        <VmodelCom v-if="VmodelCom"></VmodelCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -62,6 +65,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     JudgmentTypeCom: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue'),
     RouterPassCom: () => import('@v/Vue/VueRouter/RouterPassCom.vue'),
     VuexCom: () => import('@v/Vue/Vuex/VuexCom.vue'),
+    VmodelCom: () => import('@v/Vue/Instruction/VmodelCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -135,6 +139,7 @@ export default class Home extends Vue {
   //Vue模块
   private RouterPassCom: boolean = false //路由传参
   private VuexCom: boolean = false //Vuex的使用
+  private VmodelCom: boolean = false //v-model指令原理
 }
 </script>
 <style lang="less" scoped>

@@ -92,6 +92,10 @@ const routes: Array<RouteConfig> = [
       path: 'VuexCom',
       name: 'VuexCom',
       component: () => import('@v/Vue/Vuex/VuexCom.vue')
+    }, {
+      path: 'VmodelCom',
+      name: 'VmodelCom',
+      component: () => import('@v/Vue/Instruction/VmodelCom.vue')
     }]
   },
   {//测试路由传参
