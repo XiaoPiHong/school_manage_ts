@@ -144,8 +144,8 @@ export default class Nav extends Vue {
           ElementId: 'Vuex',
           ChildNodes: [
             {
-              ResourceName: 'Getters的使用',
-              ElementId: 'GettersCom',
+              ResourceName: 'Vuex的使用',
+              ElementId: 'VuexCom',
             },
           ],
         },

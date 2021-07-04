@@ -37,8 +37,8 @@
       <TabPane label="路由传参" name="RouterPassCom" v-if="RouterPassCom" tab="homeTabs">
         <RouterPassCom v-if="RouterPassCom"></RouterPassCom>
       </TabPane>
-      <TabPane label="Getters的使用" name="GettersCom" v-if="GettersCom" tab="homeTabs">
-        <GettersCom v-if="GettersCom"></GettersCom>
+      <TabPane label="Vuex的使用" name="VuexCom" v-if="VuexCom" tab="homeTabs">
+        <VuexCom v-if="VuexCom"></VuexCom>
       </TabPane>
     </Tabs>
   </div>
@@ -61,7 +61,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     RenderCom: () => import('@v/Iview/Table/RenderCom.vue'),
     JudgmentTypeCom: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue'),
     RouterPassCom: () => import('@v/Vue/VueRouter/RouterPassCom.vue'),
-    GettersCom: () => import('@v/Vue/Vuex/GettersCom.vue'),
+    VuexCom: () => import('@v/Vue/Vuex/VuexCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -134,7 +134,7 @@ export default class Home extends Vue {
   private JudgmentTypeCom: boolean = false //js类型验证
   //Vue模块
   private RouterPassCom: boolean = false //路由传参
-  private GettersCom: boolean = false //Vuex的Getters的使用
+  private VuexCom: boolean = false //Vuex的使用
 }
 </script>
 <style lang="less" scoped>
