@@ -35,7 +35,7 @@ export default class VmodelCom extends Vue {
   private baseValue: string = 'xiaopihong'
   private baseChecked: boolean = true
 
-  private xphValue: any = 0
+  private xphValue: string | number = 0
 }
 </script>
 <style lang="less" scoped>
