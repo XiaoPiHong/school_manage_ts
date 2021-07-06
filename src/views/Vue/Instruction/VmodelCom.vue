@@ -16,7 +16,7 @@
     {{'BaseCheckbox组件中的值为：'+baseChecked}}
     <p>1.如果要自定义组件的v-model就要借助model属性来完成</p>
     <h1>封装Input组件</h1>
-    <XphInput v-model="xphValue"></XphInput>
+    <XphInput style="width:200px;" v-model="xphValue" :placeholder="'请输入数字'" :size="'small'" :accurate="1" :max="5"></XphInput>
     {{'XphInput组件中的值为：'+xphValue}}
     </Col>
   </Row>

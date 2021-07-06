@@ -1,8 +1,5 @@
 <template>
-  <Row>
-    <Input v-model="mV" @on-change="myChange($event)"></Input>
-    <Button type="primary" @click="test">测试</Button>
-  </Row>
+  <Input v-model="mV" @on-change="myChange($event)" :size="size" :placeholder="placeholder" :disabled="disabled"></Input>
 </template>
 <script lang="ts">
 import {
@@ -21,8 +18,25 @@ export default class XphInput extends Vue {
   private mV: any = ''
   @Model('change')
   @Prop()
-  value!: any
-  @Emit('change') changeVal(val: any) {
+  readonly value!: any
+
+  @Prop({ type: Number, default: 99999999999 })
+  readonly max!: number //最大值(默认最大百亿)
+
+  @Prop({ type: Number, default: 0 })
+  readonly accurate!: number //精确值(默认不带小数)
+
+  @Prop({ type: String })
+  readonly size!: string
+
+  @Prop({ type: String })
+  readonly placeholder!: string
+
+  @Prop({ type: Boolean, default: false })
+  readonly disabled!: boolean
+
+  @Emit('change')
+  changeVal(val: any) {
     return val
   }
   get MyValue(): any {
@@ -36,26 +50,39 @@ export default class XphInput extends Vue {
   private myChange(e: any) {
     let val = e.target.value
     this.$nextTick(() => {
-      if ( (isNaN(Number(e.data)) && e.data !== '.') || val.split('.').length - 1 > 1 || val === '.' ) {
+      if (
+        (isNaN(Number(e.data)) && e.data !== '.') ||
+        val.split('.').length - 1 > 1 ||
+        val === '.'
+      ) {
         this.$set(this, 'mV', '')
-      } else if ( Number(val < 0) || Number(val > 10000000000000) || e.data === ' ' || isNaN(Number(val)) ) {
+      } else if (
+        Number(val < 0) ||
+        Number(val > 99999999999) ||
+        e.data === ' ' ||
+        isNaN(Number(val))
+      ) {
         this.$set(this, 'mV', '0')
-      } else if ( (val[0] === '.' && val[1] !== '.' && val.length > 1) || (val[0] === '0' && val[1] !== '.' && val.length > 1) ) {
-        let s = String(Number(val))
-        if (s.indexOf('.') > 0 && s.length - (s.indexOf('.') + 1) > 2) {
-          this.$set(this, 'mV', s.slice(0, s.indexOf('.') + 3))
-        } else {
-          this.$set(this, 'mV', s)
-        }
-      } else if ( val.indexOf('.') > 0 && val.length - (val.indexOf('.') + 1) > 2 ) {
-        this.$set(this, 'mV', val.slice(0, val.indexOf('.') + 3))
+      } else if (Number(val > this.max)) {
+        this.$set(this, 'mV', String(this.max))
+      } else if (
+        (val[0] === '.' && val[1] !== '.' && val.length > 1) ||
+        (val[0] === '0' && val[1] !== '.' && val.length > 1)
+      ) {
+        this.$set(this, 'mV', String(Number(val)).slice(0, 2 + this.accurate))
+      } else if (
+        val.indexOf('.') > 0 &&
+        val.length - (val.indexOf('.') + 1) > this.accurate
+      ) {
+        this.$set(
+          this,
+          'mV',
+          val.slice(0, val.indexOf('.') + this.accurate + 1)
+        )
       } else {
         this.$set(this, 'mV', val)
       }
     })
-  }
-  private test(): void {
-    console.log(this.value)
   }
   mounted() {
     this.mV = this.value
