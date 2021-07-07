@@ -23,6 +23,7 @@ namespace Iview {
     cols2: string,
     cols3: string,
     cols4: string,
+    cols5: string
   }
 }
 export default Iview

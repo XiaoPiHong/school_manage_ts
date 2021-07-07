@@ -14,7 +14,8 @@
         <img src="../../../assets/Images/note/table_render_1.png" alt="">
       </div>
       <div style="flex:1;">
-        <p>3.<span class="f-color-red">注意：</span>如果当用户需要对tableData进行监控，采用上面的方法会导致vue无法监控到tableData内数据的变化（实际上是发生了变化），这样我们不能通过常规的watch或者时computer对数据进行监控。<span class="f-color-red">解决方法：</span>采用html的失去焦点事件，当Input组件失去焦点时，对某个数据进行更新，从而达到数据一致。</p>
+        <p>3.<span class="f-color-red">注意：</span>如果当用户需要对tableData进行监控，采用上面的方法会导致vue无法监控到tableData内数据的变化（实际上是发生了变化），这样我们不能通过常规的watch或者时computer对数据进行监控。<span
+            class="f-color-red">解决方法：</span>采用html的失去焦点事件，当Input组件失去焦点时，对某个数据进行更新，从而达到数据一致。</p>
         <img src="../../../assets/Images/note/table_render_2.png" alt="">
       </div>
     </div>
@@ -28,6 +29,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Interface from '@/assets/Interface/Iview'
+import XphInput from '@c/PublicCom/XphInput.vue'
 @Component({
   name: 'RenderCom',
   components: {},
@@ -43,65 +45,94 @@ export default class Com extends Vue {
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
     {
       Id: 1,
       cols2: 'test',
       cols3: '',
       cols4: '',
+      cols5: '',
     },
   ]
   private cols: any[] = [
     { title: 'Id', key: 'Id' },
-    { title: '列2', key: 'cols2' },
+    //iview 2.x 在Table中使用Input=====================
+    {
+      title: '列2',
+      key: 'cols2',
+      render: (h: any, params: any) => {
+        return h('Input', {
+          props: {
+            value: params.row.clos2,
+            placeholder: '请输入内容',
+          },
+          on: {
+            'on-change': (e: any) => {
+              params.row.clos2 = e.target.value
+              this.data[params.row._index] = params.row
+            },
+          },
+        })
+      },
+    },
+    //iview 4.x 在Table中使用Input=====================
     {
       title: '列3',
       key: 'cols3',
@@ -136,6 +167,7 @@ export default class Com extends Vue {
         })
       },
     },
+    //iview 4.x/2.x 在Table中使用Select===================
     {
       title: '列4',
       key: 'cols4',
@@ -169,6 +201,26 @@ export default class Com extends Vue {
             ),
           ]
         )
+      },
+    },
+    //iview 4.x/2.x 在Table中使用二次封装的Input组件
+    {
+      title: '列5',
+      key: 'cols5',
+      render: (h: any, params: any) => {
+        return h(XphInput, {
+          props: {
+            value: params.row.cols5,
+            accurate: 2,
+            max: 9999.99,
+          },
+          on: {
+            change: (e: any) => {
+              params.row.cols5 = e
+              this.data[params.row._index] = params.row
+            },
+          },
+        })
       },
     },
   ]
