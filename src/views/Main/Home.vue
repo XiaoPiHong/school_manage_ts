@@ -43,6 +43,9 @@
       <TabPane label="v-model指令原理" name="VmodelCom" v-if="VmodelCom" tab="homeTabs">
         <VmodelCom v-if="VmodelCom"></VmodelCom>
       </TabPane>
+      <TabPane label="Blob对象" name="BlobCom" v-if="BlobCom" tab="homeTabs">
+        <BlobCom v-if="BlobCom"></BlobCom>
+      </TabPane>
     </Tabs>
   </div>
 </template>
@@ -66,6 +69,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
     RouterPassCom: () => import('@v/Vue/VueRouter/RouterPassCom.vue'),
     VuexCom: () => import('@v/Vue/Vuex/VuexCom.vue'),
     VmodelCom: () => import('@v/Vue/Instruction/VmodelCom.vue'),
+    BlobCom: () => import('@v/JavaScript/ES5/BlobCom.vue'),
   },
 })
 export default class Home extends Vue {
@@ -136,6 +140,7 @@ export default class Home extends Vue {
   //JavaScript模块
   private AsyncCom: boolean = false //async和await
   private JudgmentTypeCom: boolean = false //js类型验证
+  private BlobCom: boolean = false //Blob对象
   //Vue模块
   private RouterPassCom: boolean = false //路由传参
   private VuexCom: boolean = false //Vuex的使用

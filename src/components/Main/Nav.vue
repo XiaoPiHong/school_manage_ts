@@ -121,6 +121,10 @@ export default class Nav extends Vue {
               ResourceName: 'js类型验证',
               ElementId: 'JudgmentTypeCom',
             },
+            {
+              ResourceName: 'Blob对象',
+              ElementId: 'BlobCom',
+            },
           ],
         },
       ],

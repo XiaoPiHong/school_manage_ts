@@ -77,6 +77,10 @@ const routes: Array<RouteConfig> = [
       path: 'JudgmentTypeCom',
       name: 'JudgmentTypeCom',
       component: () => import('@v/JavaScript/ES5/JudgmentTypeCom.vue')
+    }, {
+      path: 'BlobCom',
+      name: 'BlobCom',
+      component: () => import('@v/JavaScript/ES5/BlobCom.vue')
     }]
   },
   //Vue模块
